@@ -13,7 +13,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "pnpm --filter аzmultiple-react-versions_* --parallel start",
+    "start": "webpack serve",
     "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "test:microfrontend": "npx jest ./index.spec.js",
@@ -42,8 +42,13 @@
     "@types/node": "^20.14.9",
     "dotenv": "^16.0.2",
     "wait-port": "^1.1.0",
-    "webpack": "^5.92.1",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^3.11.1"
+    "@babel/core": "^7.14.3",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "external-remotes-plugin": "^1.0.0",
+    "html-webpack-plugin": "^5.3.1",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^5.0.0"
   }
 }

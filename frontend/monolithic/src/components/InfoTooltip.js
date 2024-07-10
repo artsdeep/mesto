@@ -23,4 +23,3 @@ function InfoTooltip({ isOpen, onClose, status }) {
 
 export default InfoTooltip;
 
- 
