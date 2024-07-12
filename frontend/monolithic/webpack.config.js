@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const path = require("path");
+const {dependencies: deps} = require("./package.json");
 
 module.exports = {
   entry: "./src/index",
@@ -57,9 +58,24 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "app",
       filename: "remoteEntry.js",
-      remotes: {},
+      remotes: {
+        mf_auth: "mf_auth@http://localhost:3302/remoteEntry.js",
+        mf_layout: "mf_layout@http://localhost:3301/remoteEntry.js",
+        mf_profile: "mf_profile@http://localhost:3303/remoteEntry.js"
+      },
       exposes: {},
-      shared: {},
+      shared: [{
+        ...deps,
+        react: {
+          singleton: true,
+          requiredVersion: deps.react,
+        },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: deps["react-dom"],
+        },
+        "react-router-dom":{ singleton: true}
+      },'./src/contexts/CurrentUserContext']
     }),
     new ExternalTemplateRemotesPlugin(),
     new HtmlWebpackPlugin({

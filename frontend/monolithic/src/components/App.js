@@ -1,21 +1,27 @@
-import React from "react";
+import React, {Suspense} from "react";
 import { Route, useHistory, Switch } from "react-router-dom";
-import Header from "./Header";
 import Main from "./Main";
-import Footer from "./Footer";
+
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
+
 import AddPlacePopup from "./AddPlacePopup";
-import Register from "./Register";
-import Login from "./Login";
+
+
 import InfoTooltip from "./InfoTooltip";
 import ProtectedRoute from "./ProtectedRoute";
 import * as auth from "../utils/auth.js";
 
+const Header = React.lazy(() => import("mf_layout/Header"));
+const Footer = React.lazy(() => import("mf_layout/Footer"));
+
+const Login = React.lazy(() => import("mf_auth/Login"));
+const Register = React.lazy(() => import("mf_auth/Register"));
+
+const EditProfilePopup = React.lazy(() => import("mf_profile/EditProfilePopup"));
+const EditAvatarPopup = React.lazy(() => import("mf_profile/EditAvatarPopup"));
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
@@ -181,7 +187,10 @@ function App() {
     // В компонент App внедрён контекст через CurrentUserContext.Provider
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page__content">
-        <Header email={email} onSignOut={onSignOut} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Header email={email} onSignOut={onSignOut} />
+        </Suspense>
+
         <Switch>
           {/*Роут / защищён HOC-компонентом ProtectedRoute*/}
           <ProtectedRoute
@@ -199,29 +208,40 @@ function App() {
           />
           {/*Роут /signup и /signin не является защищёнными, т.е оборачивать их в HOC ProtectedRoute не нужно.*/}
           <Route path="/signup">
-            <Register onRegister={onRegister} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Register onRegister={onRegister} />
+            </Suspense>
+
           </Route>
           <Route path="/signin">
-            <Login onLogin={onLogin} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Login onLogin={onLogin} />
+            </Suspense>
           </Route>
         </Switch>
-        <Footer />
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onUpdateUser={handleUpdateUser}
-          onClose={closeAllPopups}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Footer />
+        </Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
+          <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
+            onUpdateUser={handleUpdateUser}
+            onClose={closeAllPopups}
+          />
+        </Suspense>
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onAddPlace={handleAddPlaceSubmit}
           onClose={closeAllPopups}
         />
         <PopupWithForm title="Вы уверены?" name="remove-card" buttonText="Да" />
-        <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onUpdateAvatar={handleUpdateAvatar}
-          onClose={closeAllPopups}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onUpdateAvatar={handleUpdateAvatar}
+            onClose={closeAllPopups}
+          />
+        </Suspense>
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         <InfoTooltip
           isOpen={isInfoToolTipOpen}
