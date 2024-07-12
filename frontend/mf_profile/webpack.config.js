@@ -12,6 +12,11 @@ module.exports = {
   output: {
     publicPath: 'auto',
   },
+  resolve: {
+    alias: {
+      'frontend_shared-context': path.resolve(__dirname, '../shared-context'),
+    },
+  },
   module: {
     rules: [
       {
@@ -70,7 +75,10 @@ module.exports = {
           singleton: true,
           requiredVersion: deps["react-dom"],
         },
-
+        'frontend_shared-context': {
+          import: 'frontend_shared-context',
+          requiredVersion: require('../shared-context/package.json').version,
+        },
       }]
     }),
     new HtmlWebpackPlugin({

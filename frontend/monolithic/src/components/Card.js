@@ -1,5 +1,5 @@
 import React from 'react';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { CurrentUserContext } from 'frontend_shared-context';
 
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const cardStyle = { backgroundImage: `url(${card.link})` };
@@ -17,7 +17,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   }
 
   const currentUser = React.useContext(CurrentUserContext);
-
+  console.log(currentUser)
   const isLiked = card.likes.some(i => i._id === currentUser._id);
   const cardLikeButtonClassName = `card__like-button ${isLiked && 'card__like-button_is-active'}`;
 

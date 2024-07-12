@@ -5,7 +5,7 @@ import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/api";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { CurrentUserContext } from 'frontend_shared-context';
 
 import AddPlacePopup from "./AddPlacePopup";
 
