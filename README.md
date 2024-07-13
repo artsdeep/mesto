@@ -28,6 +28,6 @@
 1. Выполните команду `yarn install` в директории `frontend`.
 2. В каждом микрофронте выполните команду `yarn install`.
 3. Для запуска выполните команду `yarn run start`.
-
+4. Открывваем  http://localhost:3004/
 ## Второе задание (Перевод монолита на микросервисы)
 https://drive.google.com/file/d/1DSwxJJYPEVhtTEw9pA0Xa1F6ZAin75N9/view?usp=sharing

@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require("path");
 const {dependencies: deps} = require("./package.json");
 
@@ -93,5 +94,16 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./public/index.html",
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'public',
+          to: '',
+          globOptions: {
+            ignore: ['**/index.html'], // Игнорировать index.html
+          },
+        },
+      ]
+    })
   ],
 };
