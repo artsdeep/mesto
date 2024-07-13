@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-function Register ({ onRegister }){
+function Register ({ onRegister, onSignIn }){
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -12,6 +11,9 @@ function Register ({ onRegister }){
       password
     }
     onRegister(userData);
+  }
+  function handleSignIn(){
+    onSignIn();
   }
   return (
     <div className="auth-form">
@@ -31,8 +33,7 @@ function Register ({ onRegister }){
         </div>
         <div className="auth-form__wrapper">
           <button className="auth-form__button" type="submit">Зарегистрироваться</button>
-
-   {/*       <p className="auth-form__text">Уже зарегистрированы? <Link className="auth-form__link" to="/signin">Войти</Link></p>*/}
+          <p className="auth-form__text">Уже зарегистрированы? <div className="auth-form__link" onClick={handleSignIn}>Войти</div></p>
 
         </div>
       </form>
