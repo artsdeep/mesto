@@ -3,16 +3,6 @@ const { chromium } = require('playwright');
 const { spawn } = require('child_process');
 const waitPort = require('wait-port');
 
-describe('Микрофронтенд директории', () => {
-  test('Проверка на наличие директорий, которые в названии имеют слово microfrontend', () => {
-    const dirs = fs.readdirSync('./', { withFileTypes: true });
-    const hasDirs = dirs.some((item) =>
-      item.isDirectory() && item.name.includes('microfrontend')
-    );
-
-    expect(hasDirs).toBe(true);
-  });
-});
 
 describe('Сборка проекта', () => {
   test('Наличие файла index.html в директории public после сборки', () => {

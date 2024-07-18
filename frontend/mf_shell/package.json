@@ -14,8 +14,7 @@
   },
   "scripts": {
     "start": "webpack serve",
-    "build": "webpack --mode production",
-    "test:microfrontend": "echo 'test:microfrontend is disabled'"
+    "build": "webpack --mode production"
   },
   "eslintConfig": {
     "extends": [
