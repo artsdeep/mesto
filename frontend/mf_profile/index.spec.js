@@ -6,7 +6,7 @@ const waitPort = require('wait-port');
 
 describe('Сборка проекта', () => {
   test('Наличие файла index.html в директории public после сборки', () => {
-    const fileExists = fs.existsSync('./mf_shell/public/index.html',);
+    const fileExists = fs.existsSync('./mf_profile/public/index.html',);
 
     expect(fileExists).toBe(true);
   });
@@ -20,7 +20,7 @@ describe('Запуск проекта', () => {
 
   beforeAll(async () => {
     yarnProcess = spawn('yarn', ['start'], { detached: true });
-    await waitPort({ host: 'localhost', port: 3004 });
+    await waitPort({ host: 'localhost', port: 3303 });
     browser = await chromium.launch({ headless: true });
     page = await browser.newPage();
   });
