@@ -13,7 +13,7 @@ module.exports = {
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
       'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
     },
-    port: 3301,
+    port: 3305,
   },
   output: {
     publicPath: 'auto',
@@ -65,16 +65,11 @@ module.exports = {
   plugins: [
     // To learn more about the usage of this plugin, please visit https://webpack.js.org/plugins/module-federation-plugin/
     new ModuleFederationPlugin({
-      name: 'mf_layout',
+      name: 'mf_card',
       filename: 'remoteEntry.js',
-      remotes: {
-        mf_card: "mf_card@http://localhost:3305/remoteEntry.js"
-      },
       exposes: {
         './App': './src/App',
-        './Footer': './src/Components/Footer',
-        './Header': './src/Components/Header',
-        './Main': './src/Components/Main',
+        './Card': './src/Components/Card',
       },
       shared: [{
         ...deps,

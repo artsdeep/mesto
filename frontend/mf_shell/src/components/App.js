@@ -1,6 +1,6 @@
 import React, {Suspense} from "react";
 import { Route, useHistory, Switch } from "react-router-dom";
-import Main from "./Main";
+//import Main from "../../../mf_layout/src/Components/Main";
 
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
@@ -16,6 +16,7 @@ import * as auth from "../utils/auth.js";
 
 const Header = React.lazy(() => import("mf_layout/Header"));
 const Footer = React.lazy(() => import("mf_layout/Footer"));
+const Main = React.lazy(() => import("mf_layout/Main"));
 
 const Login = React.lazy(() => import("mf_auth/Login"));
 const Register = React.lazy(() => import("mf_auth/Register"));
@@ -217,6 +218,7 @@ function App() {
 
         <Switch>
           {/*Роут / защищён HOC-компонентом ProtectedRoute*/}
+          <Suspense fallback={<div>Loading...</div>}>
           <ProtectedRoute
             exact
             path="/"
@@ -230,6 +232,7 @@ function App() {
             onCardDelete={handleCardDelete}
             loggedIn={isLoggedIn}
           />
+          </Suspense>
           {/*Роут /signup и /signin не является защищёнными, т.е оборачивать их в HOC ProtectedRoute не нужно.*/}
           <Route path="/signup">
             <Suspense fallback={<div>Loading...</div>}>
