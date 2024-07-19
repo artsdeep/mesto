@@ -218,7 +218,7 @@ function App() {
 
         <Switch>
           {/*Роут / защищён HOC-компонентом ProtectedRoute*/}
-          <Suspense fallback={<div>Loading...</div>}>
+
           <ProtectedRoute
             exact
             path="/"
@@ -232,7 +232,7 @@ function App() {
             onCardDelete={handleCardDelete}
             loggedIn={isLoggedIn}
           />
-          </Suspense>
+
           {/*Роут /signup и /signin не является защищёнными, т.е оборачивать их в HOC ProtectedRoute не нужно.*/}
           <Route path="/signup">
             <Suspense fallback={<div>Loading...</div>}>
